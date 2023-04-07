@@ -1,13 +1,101 @@
-body {
+body{
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(90deg, rgba(0,217,255,1) 0%, rgba(113,0,255,1) 50%, rgba(0,212,255,1) 100%);
+}
+button{
+  cursor: pointer;
+}
+/* Styling for App */
+.App{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows:1fr 1fr ;
+}
+/* Styling for Display and Content */
+.display{
+  color: white;
+  grid-column-start: 3;
+  grid-column-end: 8;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+.posts{
+  background-color: black;
+  margin: 10px;
+  border-radius: 20px;
+  padding: 20px;
+}
+.post--content{
+  word-wrap:break-word;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Styling for Navbar */
+.navbar{
+  background-color: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin: 0px;
+  grid-column-start: 1;
+  grid-column-end: 8;
+  grid-row-start: 0;
+  grid-row-end: 1;
+}
+.nav--title{
+  margin-right: auto;
+  margin-left: 20px;
+}
+.user--img{
+  width: 60px;
+  height: 60px;
+  border-radius: 25px;
+  margin:10px;
+}
+.nav--info{
+  margin: 20px;
+}
+
+/* Styling for Form */
+.form{
+  margin: 10px;
+  border-radius: 25px;
+  background-color: black;
+  color: white;
+  padding: 20px;
+  align-items:flex-start;
+  
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+.form > textarea{
+  width: 100%;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  text-indent: 10px;
+}
+.form--title{
+  grid-column-start: 2;
+  grid-column-end: 3;
+  font-size: 40px;
+  align-self: center;
+}
+.input--title{
+  height: 80px;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+.input--body{
+  height: 200px;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+.form--button{
+  border-radius: 20px;
+  width: 100%;
+  height: 40px;
+  grid-column-start: 1;
+  grid-column-end: 5;
 }
