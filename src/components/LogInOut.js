@@ -1,20 +1,61 @@
-import {auth} from '../firebase'
-import { GoogleAuthProvider,signInWithPopup, signOut} from 'firebase/auth'
+import {React,useState} from 'react'
+import {auth,db} from '../firebase'
+import {GoogleAuthProvider,signInWithPopup, signOut} from 'firebase/auth'
+import {collection,doc,getDocs,setDoc} from 'firebase/firestore'
 
 export default function LogInOut(props){
+    const [users,setUsers] = useState()
+    const [isUser,setIsUser] = useState('')
 
-    const Logout  = async() =>{
-        await signOut()
+    const userRef=collection(db,'users')
+
+    function checkReturningUser(){
+        let User
+        const checkUser = async() =>{
+            const dbUsers = await getDocs(userRef)
+            const filteredUsers = dbUsers.docs.map((doc)=>({
+                ...doc.data(),
+                id:doc.id
+            }))
+            setUsers(filteredUsers)
+
+            filteredUsers.map((user)=>{
+                if (user.id == auth.currentUser.email){
+                    setIsUser(true)
+                    User = true
+                    console.log('true')
+                } 
+            })
+
+            console.log(isUser)
+            console.log(User)
+            if(User != true){
+                console.log('creating a new user')
+                setDoc(doc(db,'users',auth.currentUser.email),{
+                    user:auth.currentUser.email,
+                    identity:false,
+                    name:auth.currentUser.displayName
+                })
+            }
+        }
+        checkUser()
+        
     }
-    
+
     const Login = async()=>{
         const googleProvider = new GoogleAuthProvider()
         await signInWithPopup(auth, googleProvider)
+        checkReturningUser()
     }
+
+    const LogOut = async() =>{
+        signOut(auth)
+    }
+
     return(
         <div>
             <button onClick = {Login}>Log In</button>
-            <button onClick = {Logout}>Log Out</button>
+            <button onClick = {LogOut}>Log Out</button>
         </div>
     )
 }
