@@ -30,8 +30,6 @@ export default function Display() {
           // console.log('running')
   },[newPost])
 
-
-
   return (
        <div className = 'display'>
             {posts.map((post)=>(
