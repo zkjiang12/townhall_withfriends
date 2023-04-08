@@ -4,6 +4,9 @@ import {GoogleAuthProvider,signInWithPopup, signOut} from 'firebase/auth'
 import {collection,doc,getDocs,setDoc} from 'firebase/firestore'
 
 export default function LogInOut(props){
+    const login = props.login
+    const setLogin = props.setLogin
+
     const [users,setUsers] = useState()
     const [isUser,setIsUser] = useState('')
 
@@ -46,16 +49,20 @@ export default function LogInOut(props){
         const googleProvider = new GoogleAuthProvider()
         await signInWithPopup(auth, googleProvider)
         checkReturningUser()
+        setLogin(true)
     }
 
     const LogOut = async() =>{
         signOut(auth)
+        setLogin(false)
     }
 
     return(
         <div>
-            <button onClick = {Login}>Log In</button>
-            <button onClick = {LogOut}>Log Out</button>
+            {login ? 
+                <button onClick = {LogOut}>Log Out</button>:
+                <button onClick = {Login}>Log In</button>
+            }
         </div>
     )
 }

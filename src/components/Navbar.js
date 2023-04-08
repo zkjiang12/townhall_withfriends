@@ -1,8 +1,8 @@
 import {React,useState} from 'react'
-import LogInOut from './LogInOut'
+import UserInfo from './UserInfo'
 import jiao from '/Users/zikangjiang/townhall_withfriends/app/src/img/jiao.png'
 
-export default function Navbar(){
+export default function Navbar(props){
 
     const[openPage,setOpenPage] = useState(false)
 
@@ -16,8 +16,11 @@ export default function Navbar(){
             <img className = 'user--img' src = {jiao} alt = 'chubby dog'/>
             <h3 className = 'nav--info' type = 'button' onClick = {openpage}>User Info</h3>
             {openPage ?
-            <LogInOut
-                openPage = {openPage} 
+            <UserInfo 
+                login = {props.login} 
+                setLogin = {props.setLogin}
+                anonymity = {props.anonymity} 
+                setAnonymity = {props.setAnonymity}
             />:''}
         </div>
     )
